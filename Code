@@ -55,28 +55,28 @@ void loop() {
 
   //Styr rotationen av axeln
   if (hogerY > mitten + offset) {
-    vinkel2++;
-    if (vinkel2 > 160) vinkel2 = 160; //Motorn får röra sig högst fram till 160 grader
+    vinkel2--;
+    if (vinkel2 < 15) vinkel2 = 15; //Motorn får gå som lägst till 15 graders rotation
     axel.write(vinkel2);
     delay(10);
   }
   else if (hogerY < mitten - offset) {
-    vinkel2--;
-    if (vinkel2 < 15) vinkel2 = 15; //Motorn får gå som lägst till 15 graders rotation
+    vinkel2++;
+    if (vinkel2 > 160) vinkel2 = 160; //Motorn får röra sig högst fram till 160 grader
     axel.write(vinkel2);
     delay(10);
   }
 
   //Styr rotationen av armbågen
   if (vansterY > mitten + offset) {
-    vinkel3++;
-    if (vinkel3 > 135) vinkel3 = 135;
+    vinkel3--;
+    if (vinkel3 < 10) vinkel3 = 10;
     armbage.write(vinkel3);
     delay(10);
   }
   else if (vansterY < mitten - offset) {
-    vinkel3--;
-    if (vinkel3 < 10) vinkel3 = 10;
+    vinkel3++;
+    if (vinkel3 > 135) vinkel3 = 135;
     armbage.write(vinkel3);
     delay(10);
   }
