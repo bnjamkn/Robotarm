@@ -10,7 +10,7 @@ Servo klo;
 
 const int knapp = 2;  //Blåa reset knappen
 const int vSwitch = 7;  //Vänstra joystick knappen
-const int hSwtich = 8;  // Högra joystick knappen
+const int hSwitch = 8;  // Högra joystick knappen
 
 int vansterX, vansterY, hogerX, hogerY; //Joystick-axlar
 
@@ -36,10 +36,10 @@ void setup() {
 
 void loop() {
   // Läs av joystick värden och tilldela till rätt axel för varsin joystick
-  vansterX = analogRead(A0);
-  vansterY = analogRead(A1);
-  hogerX = analogRead(A2);
-  hogerY = analogRead(A3);
+  vansterX = analogRead(A1);
+  vansterY = analogRead(A0);
+  hogerX = analogRead(A3);
+  hogerY = analogRead(A2);
 
   //Styr rotationen av basen
   if (vansterX > mitten + offset) {
@@ -105,11 +105,13 @@ void loop() {
   }
 
   //Joystick knapparna används även för att styra klon
-  if (digitalRead(vSwitch) == HIGH) {
-    klo.write(115);
+  if (digitalRead(vSwitch) == LOW) {
+    vinkel4 = 170;
+    klo.write(vinkel4);
   }
-  else if (digitalRead(hSwitch) == HIGH){
-    klo.write(170);
+  if (digitalRead(hSwitch) == LOW){
+    vinkel4 = 115;
+    klo.write(vinkel4);
   }
 
   // DEBUG som användes för att hitta gränsvärden, kan orsaka märkvärdig störning
