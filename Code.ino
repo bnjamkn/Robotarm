@@ -98,10 +98,61 @@ void loop() {
   //Kollar ifall man trycker på knappen, och sätter olika värden på motorerna som ska motsvara en utgångspunkt
   // "Reset knapp"
   if (digitalRead(knapp) == HIGH) {
-    bas.write(90);
-    axel.write(90);
-    armbage.write(90);
-    klo.write(170);
+    if (vinkel1 > 90) {
+      for (int n = vinkel1; vinkel1 > 90; n--) {
+        bas.write(n);
+        delay(10);
+      }
+    }
+    else if (vinkel1 == 90) ;
+    else if (vinkel1 < 90) {
+      for (int n = vinkel1; vinkel1 < 90; n++) {
+        bas.write(n);
+        delay(10);
+      }
+    }
+  }
+
+  if (vinkel2 > 90) {
+    for (int n = vinkel2; vinkel2 > 90; n--) {
+      bas.write(n);
+      delay(10);
+    }
+  }
+  else if (vinkel2 == 90) ;
+  else if (vinkel2 < 90) {
+    for (int n = vinkel2; vinkel2 < 90; n++) {
+      bas.write(n);
+      delay(10);
+    }
+  }
+
+  if (vinkel3 > 90) {
+    for (int n = vinkel3; vinkel3 > 90; n--) {
+      bas.write(n);
+      delay(10);
+    }
+  }
+  else if (vinkel3 == 90);
+  else if (vinkel3 < 90) {
+    for (int n = vinkel3; vinkel3 < 90; n++) {
+      bas.write(n);
+      delay(10);
+    }
+  }
+
+  if (vinkel4 > 170) {
+    for (int n = vinkel4; vinkel4 > 170; n--) {
+      bas.write(n);
+      delay(10);
+    }
+  }
+  else if (vinkel4 == 170);
+  else if (vinkel4 < 170) {
+    for (int n = vinkel4; vinkel4 < 170; n++) {
+      bas.write(n);
+      delay(10);
+    }
   }
 
   //Joystick knapparna används även för att styra klon
@@ -109,18 +160,18 @@ void loop() {
     vinkel4 = 170;
     klo.write(vinkel4);
   }
-  if (digitalRead(hSwitch) == LOW){
+  if (digitalRead(hSwitch) == LOW) {
     vinkel4 = 115;
     klo.write(vinkel4);
   }
 
   // DEBUG som användes för att hitta gränsvärden, kan orsaka märkvärdig störning
   /*
-  Serial.println("----------------------");
-  Serial.println(vinkel1);
-  Serial.println(vinkel2);
-  Serial.println(vinkel3);
-  Serial.println(vinkel4);
-  Serial.println("----------------------");
-  */ 
+    Serial.println("----------------------");
+    Serial.println(vinkel1);
+    Serial.println(vinkel2);
+    Serial.println(vinkel3);
+    Serial.println(vinkel4);
+    Serial.println("----------------------");
+  */
 }
