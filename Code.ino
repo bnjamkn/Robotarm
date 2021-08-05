@@ -99,14 +99,14 @@ void loop() {
   // "Reset knapp"
   if (digitalRead(knapp) == HIGH) {
     if (vinkel1 > 90) {
-      for (int n = vinkel1; vinkel1 > 90; n--) {
+      for (int n = vinkel1; n > 90; n--) {
         bas.write(n);
         delay(10);
       }
     }
     else if (vinkel1 == 90) ;
     else if (vinkel1 < 90) {
-      for (int n = vinkel1; vinkel1 < 90; n++) {
+      for (int n = vinkel1; n < 90; n++) {
         bas.write(n);
         delay(10);
       }
@@ -114,42 +114,42 @@ void loop() {
   }
 
   if (vinkel2 > 90) {
-    for (int n = vinkel2; vinkel2 > 90; n--) {
+    for (int n = vinkel2; n > 90; n--) {
       bas.write(n);
       delay(10);
     }
   }
   else if (vinkel2 == 90) ;
   else if (vinkel2 < 90) {
-    for (int n = vinkel2; vinkel2 < 90; n++) {
+    for (int n = vinkel2; n < 90; n++) {
       bas.write(n);
       delay(10);
     }
   }
 
   if (vinkel3 > 90) {
-    for (int n = vinkel3; vinkel3 > 90; n--) {
+    for (int n = vinkel3; n > 90; n--) {
       bas.write(n);
       delay(10);
     }
   }
   else if (vinkel3 == 90);
   else if (vinkel3 < 90) {
-    for (int n = vinkel3; vinkel3 < 90; n++) {
+    for (int n = vinkel3; n < 90; n++) {
       bas.write(n);
       delay(10);
     }
   }
 
   if (vinkel4 > 170) {
-    for (int n = vinkel4; vinkel4 > 170; n--) {
+    for (int n = vinkel4; n > 170; n--) {
       bas.write(n);
       delay(10);
     }
   }
   else if (vinkel4 == 170);
   else if (vinkel4 < 170) {
-    for (int n = vinkel4; vinkel4 < 170; n++) {
+    for (int n = vinkel4; n < 170; n++) {
       bas.write(n);
       delay(10);
     }
