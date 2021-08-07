@@ -24,7 +24,7 @@ const int mitten = 511; // mitten värdet på spakarna, d.v.s värdet när dem i
 const int offset = 50; // De första 50 värdena i mitten av spakarna kommer inte påverka motorerna
 
 void setup() {
-  //Serial.begin(115200); används för debug som förekommer nedan
+  //Serial.begin(115200); //används för debug som förekommer nedan
   pinMode(knapp, INPUT);
   pinMode(vSwitch, INPUT_PULLUP);
   pinMode(hSwitch, INPUT_PULLUP);
@@ -41,16 +41,20 @@ void loop() {
   hogerX = analogRead(A3);
   hogerY = analogRead(A2);
 
+  // Hastighets regulering med potentiometer
+  int hastighet = analogRead(A4);
+  hastighet = map(hastighet, 0, 1023, 10, 100);
+
   //Styr rotationen av basen
   if (vansterX > mitten + offset) {
     vinkel1++;
     bas.write(vinkel1);
-    delay(10);
+    delay(hastighet);
   }
   else if (vansterX < mitten - offset) {
     vinkel1--;
     bas.write(vinkel1);
-    delay(10);
+    delay(hastighet);
   }
 
   //Styr rotationen av axeln
@@ -58,13 +62,13 @@ void loop() {
     vinkel2--;
     if (vinkel2 < 15) vinkel2 = 15; //Motorn får gå som lägst till 15 graders rotation
     axel.write(vinkel2);
-    delay(10);
+    delay(hastighet);
   }
   else if (hogerY < mitten - offset) {
     vinkel2++;
     if (vinkel2 > 160) vinkel2 = 160; //Motorn får röra sig högst fram till 160 grader
     axel.write(vinkel2);
-    delay(10);
+    delay(hastighet);
   }
 
   //Styr rotationen av armbågen
@@ -72,13 +76,13 @@ void loop() {
     vinkel3--;
     if (vinkel3 < 10) vinkel3 = 10;
     armbage.write(vinkel3);
-    delay(10);
+    delay(hastighet);
   }
   else if (vansterY < mitten - offset) {
     vinkel3++;
     if (vinkel3 > 135) vinkel3 = 135;
     armbage.write(vinkel3);
-    delay(10);
+    delay(hastighet);
   }
 
   //Styr greppet
@@ -98,16 +102,16 @@ void loop() {
   //Kollar ifall man trycker på knappen, och sätter olika värden på motorerna som ska motsvara en utgångspunkt
   // "Reset knapp"
   if (digitalRead(knapp) == HIGH) {
-    if (vinkel1 > 90) {
-      for (int n = vinkel1; n > 90; n--) {
+    if (vinkel1 > 118) {
+      for (int n = vinkel1; n > 118; n--) {
         vinkel1 = n;
         bas.write(vinkel1);
         delay(10);
       }
       delay(100);
     }
-    else if (vinkel1 < 90) {
-      for (int n = vinkel1; n < 90; n++) {
+    else if (vinkel1 < 118) {
+      for (int n = vinkel1; n < 118; n++) {
         vinkel1 = n;
         bas.write(vinkel1);
         delay(10);
@@ -115,16 +119,16 @@ void loop() {
       delay(100);
     }
 
-    if (vinkel2 > 90) {
-      for (int n = vinkel2; n > 90; n--) {
+    if (vinkel2 > 54) {
+      for (int n = vinkel2; n > 54; n--) {
         vinkel2 = n;
         axel.write(vinkel2);
         delay(10);
       }
       delay(100);
     }
-    else if (vinkel2 < 90) {
-      for (int n = vinkel2; n < 90; n++) {
+    else if (vinkel2 < 54) {
+      for (int n = vinkel2; n < 54; n++) {
         vinkel2 = n;
         axel.write(vinkel2);
         delay(10);
@@ -132,16 +136,16 @@ void loop() {
       delay(100);
     }
 
-    if (vinkel3 > 90) {
-      for (int n = vinkel3; n > 90; n--) {
+    if (vinkel3 > 68) {
+      for (int n = vinkel3; n > 68; n--) {
         vinkel3 = n;
         armbage.write(vinkel3);
         delay(10);
       }
       delay(100);
     }
-    else if (vinkel3 < 90) {
-      for (int n = vinkel3; n < 90; n++) {
+    else if (vinkel3 < 68) {
+      for (int n = vinkel3; n < 68; n++) {
         vinkel3 = n;
         armbage.write(vinkel3);
         delay(10);
@@ -149,16 +153,16 @@ void loop() {
       delay(100);
     }
 
-    if (vinkel4 > 170) {
-      for (int n = vinkel4; n > 170; n--) {
+    if (vinkel4 > 115) {
+      for (int n = vinkel4; n > 115; n--) {
         vinkel4 = n;
         klo.write(vinkel4);
         delay(10);
       }
       delay(100);
     }
-    else if (vinkel4 < 170) {
-      for (int n = vinkel4; n < 170; n++) {
+    else if (vinkel4 < 115) {
+      for (int n = vinkel4; n < 115; n++) {
         vinkel4 = n;
         klo.write(vinkel4);
         delay(10);
@@ -166,7 +170,7 @@ void loop() {
       delay(100);
     }
   }
-  
+
   //Joystick knapparna används även för att styra klon
   if (digitalRead(vSwitch) == LOW) {
     vinkel4 = 170;
@@ -178,13 +182,13 @@ void loop() {
   }
 
 
-// DEBUG som användes för att hitta gränsvärden, kan orsaka märkvärdig störning
-/*
-  Serial.println("----------------------");
-  Serial.println(vinkel1);
-  Serial.println(vinkel2);
-  Serial.println(vinkel3);
-  Serial.println(vinkel4);
-  Serial.println("----------------------");
-*/
+  // DEBUG som användes för att hitta gränsvärden, kan orsaka märkvärdig störning
+  /*
+    Serial.println("----------------------");
+    Serial.println(vinkel1);
+    Serial.println(vinkel2);
+    Serial.println(vinkel3);
+    Serial.println(vinkel4);
+    Serial.println("----------------------");
+  */
 }
