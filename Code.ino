@@ -98,29 +98,93 @@ void loop() {
   //Kollar ifall man trycker på knappen, och sätter olika värden på motorerna som ska motsvara en utgångspunkt
   // "Reset knapp"
   if (digitalRead(knapp) == HIGH) {
-    bas.write(90);
-    axel.write(90);
-    armbage.write(90);
-    klo.write(170);
-  }
+    if (vinkel1 > 90) {
+      for (int n = vinkel1; n > 90; n--) {
+        vinkel1 = n;
+        bas.write(vinkel1);
+        delay(10);
+      }
+      delay(100);
+    }
+    else if (vinkel1 < 90) {
+      for (int n = vinkel1; n < 90; n++) {
+        vinkel1 = n;
+        bas.write(vinkel1);
+        delay(10);
+      }
+      delay(100);
+    }
 
+    if (vinkel2 > 90) {
+      for (int n = vinkel2; n > 90; n--) {
+        vinkel2 = n;
+        axel.write(vinkel2);
+        delay(10);
+      }
+      delay(100);
+    }
+    else if (vinkel2 < 90) {
+      for (int n = vinkel2; n < 90; n++) {
+        vinkel2 = n;
+        axel.write(vinkel2);
+        delay(10);
+      }
+      delay(100);
+    }
+
+    if (vinkel3 > 90) {
+      for (int n = vinkel3; n > 90; n--) {
+        vinkel3 = n;
+        armbage.write(vinkel3);
+        delay(10);
+      }
+      delay(100);
+    }
+    else if (vinkel3 < 90) {
+      for (int n = vinkel3; n < 90; n++) {
+        vinkel3 = n;
+        armbage.write(vinkel3);
+        delay(10);
+      }
+      delay(100);
+    }
+
+    if (vinkel4 > 170) {
+      for (int n = vinkel4; n > 170; n--) {
+        vinkel4 = n;
+        klo.write(vinkel4);
+        delay(10);
+      }
+      delay(100);
+    }
+    else if (vinkel4 < 170) {
+      for (int n = vinkel4; n < 170; n++) {
+        vinkel4 = n;
+        klo.write(vinkel4);
+        delay(10);
+      }
+      delay(100);
+    }
+  }
+  
   //Joystick knapparna används även för att styra klon
   if (digitalRead(vSwitch) == LOW) {
     vinkel4 = 170;
     klo.write(vinkel4);
   }
-  if (digitalRead(hSwitch) == LOW){
+  if (digitalRead(hSwitch) == LOW) {
     vinkel4 = 115;
     klo.write(vinkel4);
   }
 
-  // DEBUG som användes för att hitta gränsvärden, kan orsaka märkvärdig störning
-  /*
+
+// DEBUG som användes för att hitta gränsvärden, kan orsaka märkvärdig störning
+/*
   Serial.println("----------------------");
   Serial.println(vinkel1);
   Serial.println(vinkel2);
   Serial.println(vinkel3);
   Serial.println(vinkel4);
   Serial.println("----------------------");
-  */ 
+*/
 }
