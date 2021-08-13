@@ -48,11 +48,13 @@ void loop() {
   //Styr rotationen av basen
   if (vansterX > mitten + offset) {
     vinkel1++;
+    if (vinkel1 > 180) vinkel1 = 180;
     bas.write(vinkel1);
     delay(hastighet);
   }
   else if (vansterX < mitten - offset) {
     vinkel1--;
+    if (vinkel1 < 0) vinkel1 = 0;
     bas.write(vinkel1);
     delay(hastighet);
   }
@@ -180,7 +182,6 @@ void loop() {
     vinkel4 = 115;
     klo.write(vinkel4);
   }
-
 
   // DEBUG som användes för att hitta gränsvärden, kan orsaka märkvärdig störning
   /*
